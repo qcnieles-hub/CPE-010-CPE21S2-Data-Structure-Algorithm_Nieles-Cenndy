@@ -1,0 +1,112 @@
+#ifndef PLAYLIST_LL_H
+#define PLAYLIST_LL_H
+
+#include <iostream>
+
+template <typename T>
+struct SongNode {
+    T data;
+    SongNode<T>* next;
+};
+
+// Traverse and print the circular playlist once around
+template <typename T>
+void PlaylistTraversal(SongNode<T>* head) {
+    if (head == nullptr) {
+        std::cout << "The playlist is empty" << std::endl;
+        return;
+    }
+    SongNode<T>* node = head;
+    do {
+        std::cout << node->data << std::endl;
+        node = node->next;
+    } while (node != head);
+}
+
+// Add a song to the end of the playlist, keeping it circular
+template <typename T>
+void addSong(T newData, SongNode<T>** currentHead) {
+    // 1. Allocate memory for the newNode
+    SongNode<T>* newNode = new SongNode<T>;
+
+    // 2. Put our data into new Node
+    newNode->data = newData;
+
+    // 3. If the list is empty, new node points to itself
+    if (*currentHead == nullptr) {
+        newNode->next = newNode;
+        *currentHead = newNode;
+        return;
+    }
+
+    // 4. Otherwise walk to the last node
+    SongNode<T>* cursor = *currentHead;
+    while (cursor->next != *currentHead) {
+        cursor = cursor->next;
+    }
+
+    // 5. Link last to new, and new node back to head
+    cursor->next = newNode;
+    newNode->next = *currentHead;
+}
+
+// Remove the first song matching value from the playlist
+template <typename T>
+void removeSong(T value, SongNode<T>** currentHead) {
+    if (*currentHead == nullptr) {
+        std::cout << "The playlist is empty" << std::endl;
+        return;
+    }
+
+    SongNode<T>* curr = *currentHead;
+    SongNode<T>* prev = nullptr;
+
+    // Find the last node (so we know its "prev" if we remove the head)
+    SongNode<T>* last = *currentHead;
+    while (last->next != *currentHead) {
+        last = last->next;
+    }
+    prev = last;
+
+    // Walk the circle looking for the value
+    do {
+        if (curr->data == value) {
+            if (curr->next == curr) {
+                // Only one node in the list
+                *currentHead = nullptr;
+            } else {
+                prev->next = curr->next;
+                if (curr == *currentHead) {
+                    *currentHead = curr->next;
+                }
+            }
+            delete curr;
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    } while (curr != *currentHead);
+
+    std::cout << "Song not found in playlist" << std::endl;
+}
+
+// Delete the entire playlist, freeing all nodes
+template <typename T>
+void deletePlaylist(SongNode<T>** currentHead) {
+    if (*currentHead == nullptr) {
+        std::cout << "The playlist is already empty" << std::endl;
+        return;
+    }
+
+    SongNode<T>* cursor = (*currentHead)->next;
+    while (cursor != *currentHead) {
+        SongNode<T>* toDelete = cursor;
+        cursor = cursor->next;
+        delete toDelete;
+    }
+
+    delete *currentHead;
+    *currentHead = nullptr;
+}
+
+#endif 
