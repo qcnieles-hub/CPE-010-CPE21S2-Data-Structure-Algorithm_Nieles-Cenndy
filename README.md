@@ -1,2 +1,8 @@
 ![Header](./header.png)
-![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/isocpp/logos/master/cpp_logo.png" width="180">
+</p>
+
+<p align="center">
+  <b>C++ • Programming • Data Structures • Algorithms</b>
+</p>
