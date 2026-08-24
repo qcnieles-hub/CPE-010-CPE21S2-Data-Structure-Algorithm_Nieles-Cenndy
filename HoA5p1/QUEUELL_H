@@ -1,0 +1,84 @@
+#ifndef QUEUELL_H
+#define QUEUELL_H
+
+//create a class node 
+
+template<typename T>
+class qNode{
+    public:
+    T data;
+    qNode* next;
+
+};
+// new node creator
+template <typename T>
+qNode<T>* new_node(T newNode) {
+    //allocate a space for the node
+    qNode<T>* newNode - new qNode<T>;   
+
+// store the newdata to the newNode
+    newNode -> data = newData;
+    //point the newNode next to null
+    newNode->next = nullptr;
+
+    return newData;
+}
+
+// enqueue
+template <typename T>
+void enquue(T newData, qNode<T>** frontPtr, qNode<T>** backPtr) {
+    //create if the queue is empty
+    if((*frontPtr)==nullptr && (*backPtr)==nullptr) {
+        (*frontPtr) = newNode;
+        (*backPtr) = newNoDE;
+        return;
+
+
+    }
+    // if not then insert at the back
+    (*backPtr)->next = newNode; //LINKS THE CURRENT BACK TO THE NEW NODE
+    (*backPtr)= newNode;// ASSIGNS THE BACKPTR TO THE NEW NODE 
+
+
+}
+ // dequue
+ template<typename T>
+ void dequeue(qNode<T> frontPtr, qNode<T> backPtr){
+    //check if the queue is empty
+    if((*frontPtr) = nu llptr && (*backPtr) == nullptr) {
+        std::cout<< "the queue is empty"<<std::endl;
+        return;
+    }
+
+// create a temporary variable to store the node to be deleted
+qNode<T>* deleteTemp = nullptr;
+
+//assign the current front to the deleteTemp
+deleteTemp = (*frontPtr);
+
+//check if the queue has only 1 item
+if((*frontPtr)->next = nullptr && (*backPtr)->next == nullPtr) {
+    //means only 1 item is inside the queue
+    (*frontPtr) = nullptr;
+    (*backPtr) = nullPtr;
+    delete deleteTemp;
+    return;
+}
+
+(*frontPtr) = (*frontPtr)->next;
+deleteTemp->nullptr;
+//delete node
+delete deleteTemp;
+
+ }
+
+ // display all
+
+ // isEmpty
+
+
+ #endif
+
+
+
+
